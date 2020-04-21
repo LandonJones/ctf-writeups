@@ -30,7 +30,10 @@ To get `test.py` working, you'll need to install tmux. Once you have that instal
 
 For your GDB output to look like the screenshots below, you'll need [Pwndbg](https://github.com/pwndbg/pwndbg). 
 
- 
+![pic1](screenshots/initial.png) 
+![pic2](screenshots/first_got.png) 
+![pic3](screenshots/plt.png) 
+![pic4](screenshots/puts.png)  
 ## GOT Milk Aside 
 You probably see why it's called GOT Milk, now.
 
