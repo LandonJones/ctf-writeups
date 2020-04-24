@@ -9,39 +9,7 @@ Here are some fantastic resources to learn about the GLIBC heap.
 
 ## Example  
 ### Source Code Analysis 
-There are two vulnerabilities: 
-
-The first being the input is not NULL terminated when sending an input of length size bytes. 
-```C
-void alloc(){
-	int index; 
-	int size; 
-	char* data; 
-
-	puts("Index: "); 
-
-	scanf("%d", &index); 
-
-	if (index < 0 || index >= 10){ 
-		return; 
-	} 
-	puts("Size: "); 
-	scanf("%d", &size); 
-	
-	if (size >= 0x70 || size < 0){ 
-		return; 
-	} 
-
-	data = (char *)malloc(size); 
-	
-	puts("Data"); 
-
-	read(0, data, size); // sending size bytes will prevent the input from being null terminated 
-	
-	chungus[index] = data; 
-}
-```
-The second being a UAF which leads to a double free if the delete function
+The bug in this program UAF which leads to a double free which can be abused to aquire an arbitrary write. 
 ```C
 void delete(){ 
 	int index; 
@@ -55,9 +23,9 @@ void delete(){
 	free(chungus[index]); // there is no check that the same pointer is not passed in twice
 } 
 ```
-
+From the alloc function, we can also see that we only get fastbin chunk sizes (this matters for getting a libc leak).  
 ### Getting A Heap Leak 
-
+Alright, with these vulnerabilities in mind
 ### The Fastbin Dup Technique 
 
 ### Turning A Heap Leak Into A LIBC Leak 
